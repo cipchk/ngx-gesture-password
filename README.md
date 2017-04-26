@@ -10,6 +10,8 @@ A smart gesture password locker for angular (mobile browser)
 
 ![screenshot](https://github.com/cipchk/ngx-gesture-password/blob/master/screenshot/screenshot.gif)
 
+![qr](https://github.com/cipchk/ngx-gesture-password/blob/master/screenshot/qr.png)
+
 [Live Demo](https://cipchk.github.io/ngx-gesture-password/)
 
 ## Usage
