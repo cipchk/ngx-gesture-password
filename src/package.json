@@ -1,0 +1,9 @@
+{
+  "name": "ngx-gesture-password",
+  "dependencies": {
+  },
+  "peerDependencies": {
+    "@angular/common": "*",
+    "@angular/core": "*"
+  }
+}
