@@ -12,6 +12,12 @@ A smart gesture password locker for angular (mobile browser)
 
 ![qr](https://github.com/cipchk/ngx-gesture-password/blob/master/screenshot/qr.png)
 
+**Ionic**
+
+![ionic](https://github.com/cipchk/ngx-gesture-password/blob/master/screenshot/ionic.gif)
+
+_无奈不会录制，效果太烂！_
+
 [Live Demo](https://cipchk.github.io/ngx-gesture-password/)
 
 ## Usage
