@@ -4,7 +4,6 @@ import { FormsModule } from '@angular/forms';
 import { Routes, RouterModule } from '@angular/router';
 import { BrowserModule } from '@angular/platform-browser';
 import { CommonModule } from '@angular/common';
-import { HighlightJsModule } from 'ngx-highlight-js';
 import { NotifyModule } from 'ngx-notify';
 
 import { GesturePasswordModule } from 'ngx-gesture-password';
@@ -18,7 +17,6 @@ import { DemoComponent } from './components/demo.component';
     FormsModule,
     HttpModule,
     CommonModule,
-    HighlightJsModule,
     NotifyModule.forRoot({
         notify: {
             theme: 'bootstrap',
