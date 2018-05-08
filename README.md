@@ -8,6 +8,11 @@ A smart gesture password locker for angular (mobile browser)
 
 ## Demo
 
+**Online(only mobile mode)**
+
+- [Live Demo](https://cipchk.github.io/ngx-gesture-password/)
+- [Stackblitz](https://stackblitz.com/edit/ngx-gesture-password?file=src/main.ts)
+
 ![screenshot](https://github.com/cipchk/ngx-gesture-password/blob/master/screenshot/screenshot.gif)
 
 ![qr](https://github.com/cipchk/ngx-gesture-password/blob/master/screenshot/qr.png)
@@ -15,10 +20,6 @@ A smart gesture password locker for angular (mobile browser)
 **Ionic**
 
 ![ionic](https://github.com/cipchk/ngx-gesture-password/blob/master/screenshot/ionic.gif)
-
-_无奈不会录制，效果太烂！_
-
-[Live Demo](https://cipchk.github.io/ngx-gesture-password/)
 
 ## Usage
 
@@ -28,7 +29,7 @@ _无奈不会录制，效果太烂！_
 npm install ngx-gesture-password --save
 ```
 
-import `GesturePasswordModule` 
+import `GesturePasswordModule`
 
 ```typescript
 import { GesturePasswordModule } from 'ngx-gesture-password';
