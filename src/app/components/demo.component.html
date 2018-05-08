@@ -1,0 +1,9 @@
+<p class="text-center">current password: {{pwd}}</p>
+<button class="btn btn-link btn-sm" [ngClass]="{'text-success': type==='check'}" (click)="type='check'">check</button>
+<button class="btn btn-link btn-sm" [ngClass]="{'text-success': type==='recorder'}" (click)="type='recorder'">recorder</button>
+<button class="btn btn-link btn-sm" (click)="onChangeOptions()">change option</button>
+<button class="btn btn-link btn-sm" (click)="switchState=!switchState">{{switchState?'hide':'show'}}</button>
+<div class="row">
+  <gesture-password *ngIf="switchState" style="height: 350px;" [(ngModel)]="pwd" [type]="type" [options]="options" (error)="onError($event)"
+    (checked)="onChecked($event)" (beforeRepeat)="onBeforeRepeat($event)" (afterRepeat)="onAfterRepeat($event)"></gesture-password>
+</div>
