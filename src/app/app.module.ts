@@ -1,10 +1,9 @@
-import { HttpModule } from '@angular/http';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { Routes, RouterModule } from '@angular/router';
 import { BrowserModule } from '@angular/platform-browser';
 import { CommonModule } from '@angular/common';
-import { NotifyModule } from 'ngx-notify';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ToastrModule } from 'ngx-toastr';
 
 import { GesturePasswordModule } from 'ngx-gesture-password';
 
@@ -15,18 +14,13 @@ import { DemoComponent } from './components/demo.component';
   imports: [
     BrowserModule,
     FormsModule,
-    HttpModule,
     CommonModule,
-    NotifyModule.forRoot({
-      notify: {
-        theme: 'bootstrap',
-        progress: false,
-      },
-    }),
+    BrowserAnimationsModule,
+    ToastrModule.forRoot(),
     GesturePasswordModule,
   ],
   declarations: [AppComponent, DemoComponent],
   providers: [],
   bootstrap: [AppComponent],
 })
-export class AppDemoModule {}
+export class AppDemoModule { }

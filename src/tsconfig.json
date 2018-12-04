@@ -7,8 +7,7 @@
     "module": "es2015",
     "types": [],
     "paths": {
-      "ngx-gesture-password": ["../lib/index"],
-      "ngx-gesture-password/*": ["../lib/*"]
+      "ngx-gesture-password": ["../lib/ngx-gesture-password.module"]
     }
   },
   "exclude": ["test.ts", "**/*.spec.ts"]
