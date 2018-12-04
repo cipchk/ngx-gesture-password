@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "ngx-gesture-password": {
+    "ngx-gesture-password-doc": {
       "root": "",
       "sourceRoot": "src",
       "projectType": "application",
@@ -17,7 +17,9 @@
             "tsConfig": "src/tsconfig.json",
             "polyfills": "src/polyfills.ts",
             "assets": ["src/assets"],
-            "styles": [],
+            "styles": [
+              "node_modules/ngx-toastr/toastr.css"
+            ],
             "scripts": []
           },
           "configurations": {
@@ -41,30 +43,12 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "ngx-gesture-password:build"
+            "browserTarget": "ngx-gesture-password-doc:build"
           },
           "configurations": {
             "prod": {
-              "browserTarget": "ngx-gesture-password:build:prod"
+              "browserTarget": "ngx-gesture-password-doc:build:prod"
             }
-          }
-        },
-        "extract-i18n": {
-          "builder": "@angular-devkit/build-angular:extract-i18n",
-          "options": {
-            "browserTarget": "ngx-gesture-password:build"
-          }
-        },
-        "test": {
-          "builder": "@angular-devkit/build-angular:karma",
-          "options": {
-            "main": "lib/test.ts",
-            "tsConfig": "lib/tsconfig.spec.json",
-            "karmaConfig": "karma.conf.js",
-            "polyfills": "src/polyfills.ts",
-            "scripts": [],
-            "styles": [],
-            "assets": ["src/assets"]
           }
         },
         "lint": {
@@ -75,9 +59,33 @@
           }
         }
       }
+    },
+    "ngx-gesture-password-lib": {
+      "root": "lib",
+      "projectType": "library",
+      "prefix": "",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
+          "options": {
+            "tsConfig": "lib/tsconfig.lib.json",
+            "project": "lib/ng-package.json"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "lib/test.ts",
+            "karmaConfig": "lib/karma.conf.js",
+            "polyfills": "lib/polyfills.ts",
+            "tsConfig": "lib/tsconfig.spec.json",
+            "scripts": []
+          }
+        }
+      }
     }
   },
-  "defaultProject": "ngx-gesture-password",
+  "defaultProject": "ngx-gesture-password-doc",
   "schematics": {
     "@schematics/angular:component": {
       "prefix": "",

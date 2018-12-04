@@ -21,6 +21,11 @@ A smart gesture password locker for angular (mobile browser)
 
 ![ionic](https://github.com/cipchk/ngx-gesture-password/blob/master/screenshot/ionic.gif)
 
+## Version
+
+- `2.x` angular 6.x
+- `7.x` angular 7.x
+
 ## Usage
 
 ### 1. Install

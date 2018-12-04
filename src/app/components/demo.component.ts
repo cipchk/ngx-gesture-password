@@ -1,12 +1,5 @@
-import {
-  Component,
-  OnInit,
-  ViewEncapsulation,
-  AfterViewInit,
-  ViewChild,
-  ElementRef,
-} from '@angular/core';
-import { NotifyService } from 'ngx-notify';
+import { Component, ViewEncapsulation, } from '@angular/core';
+import { ToastrService } from 'ngx-toastr';
 
 import { ERR } from 'ngx-gesture-password';
 
@@ -24,7 +17,7 @@ export class DemoComponent {
   options: any;
   switchState = true;
 
-  constructor(private _ns: NotifyService) {}
+  constructor(private _ns: ToastrService) { }
 
   onChangeOptions() {
     if (this.options) {

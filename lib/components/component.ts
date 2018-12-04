@@ -16,20 +16,19 @@ import { NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/forms';
 import { RecorderCanvas } from './recorder.canvas';
 import { Options } from './interfaces/options';
 import { ERR } from './interfaces/err';
-import { Result } from './interfaces/result';
 
 @Component({
   selector: 'gesture-password',
   template: ``,
   styles: [
-  `:host {
-    position: relative;
-    width: 100%;
-    height: 100%;
-    min-height: 100px;
-    overflow: hidden;
-    display: block;
-  }`,
+    `gesture-password {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      min-height: 100px;
+      overflow: hidden;
+      display: block;
+    }`,
   ],
   providers: [
     {
@@ -38,7 +37,7 @@ import { Result } from './interfaces/result';
       multi: true,
     },
   ],
-  encapsulation: ViewEncapsulation.Emulated,
+  encapsulation: ViewEncapsulation.None,
   preserveWhitespaces: false
 })
 export class GesturePasswordComponent
@@ -48,12 +47,12 @@ export class GesturePasswordComponent
 
   @Input() options: Options;
   @Input() type: 'check' | 'recorder' = 'check';
-  @Output() error = new EventEmitter();
-  @Output() checked = new EventEmitter();
-  @Output() beforeRepeat = new EventEmitter();
-  @Output() afterRepeat = new EventEmitter();
+  @Output() readonly error = new EventEmitter();
+  @Output() readonly checked = new EventEmitter();
+  @Output() readonly beforeRepeat = new EventEmitter();
+  @Output() readonly afterRepeat = new EventEmitter();
 
-  constructor(private el: ElementRef, private renderer: Renderer) {}
+  constructor(private el: ElementRef, private renderer: Renderer) { }
 
   async check() {
     this.rc.clearPath();
@@ -185,5 +184,5 @@ export class GesturePasswordComponent
     this.onTouched = fn;
   }
 
-  setDisabledState(isDisabled: boolean): void {}
+  setDisabledState(isDisabled: boolean): void { }
 }

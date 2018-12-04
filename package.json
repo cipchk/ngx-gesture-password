@@ -20,16 +20,14 @@
   },
   "homepage": "https://github.com/cipchk/ngx-gesture-password#readme",
   "scripts": {
-    "analyze": "ng build --prod --build-optimizer --stats-json",
     "lint": "tslint -p tsconfig.json -c tslint.json 'lib/*/*.ts'",
     "test": "ng test --code-coverage --watch=false",
     "site:build": "ng build --prod --build-optimizer",
     "site:gh": "ng build --prod --build-optimizer --base-href /ngx-gesture-password/ && gh-pages -d ./dist",
-    "build": "node scripts/build.js",
-    "release:next": "npm run build && cd publish && npm publish --access public --tag next",
+    "build": "bash build.sh",
     "release": "npm run build && cd publish && npm publish --access public"
   },
-  "devDependencies": {
+  "dependencies": {
     "@angular/animations": "~7.1.0",
     "@angular/common": "~7.1.0",
     "@angular/compiler": "~7.1.0",
@@ -42,6 +40,10 @@
     "rxjs": "~6.3.3",
     "tslib": "^1.9.0",
     "zone.js": "~0.8.26",
+    "ngx-toastr": "^9.1.1"
+  },
+  "devDependencies": {
+    "@angular-devkit/build-ng-packagr": "^0.11.1",
     "@angular-devkit/build-angular": "~0.11.0",
     "@angular/cli": "~7.1.1",
     "@angular/compiler-cli": "~7.1.0",
@@ -62,6 +64,7 @@
     "tslint": "~5.11.0",
     "typescript": "~3.1.6",
     "codecov": "^3.0.0",
-    "ngx-toastr": "^9.1.1"
+    "ng-packagr": "^4.4.5",
+    "tsickle": "^0.34.0"
   }
 }
