@@ -3,7 +3,7 @@ import {
   ElementRef,
   ViewEncapsulation,
   Input,
-  Renderer,
+  Renderer2,
   OnChanges,
   SimpleChanges,
   OnDestroy,
@@ -52,7 +52,7 @@ export class GesturePasswordComponent
   @Output() readonly beforeRepeat = new EventEmitter();
   @Output() readonly afterRepeat = new EventEmitter();
 
-  constructor(private el: ElementRef, private renderer: Renderer) { }
+  constructor(private el: ElementRef, private renderer: Renderer2) { }
 
   async check() {
     this.rc.clearPath();
@@ -130,7 +130,7 @@ export class GesturePasswordComponent
     if (opt.passwords.length !== opt.num * opt.num)
       throw new Error(`密码编码必须是 ${opt.num * opt.num} 数量`);
 
-    this.renderer.setElementStyle(
+    this.renderer.setStyle(
       this.el.nativeElement,
       'backgroundColor',
       opt.bgColor,

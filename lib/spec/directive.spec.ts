@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { GesturePasswordModule } from '../ngx-gesture-password.module';
+import { GesturePasswordModule } from '../src/ngx-gesture-password.module';
 
 const html = ``;
 
