@@ -4,9 +4,8 @@ import { NgModule } from '@angular/core';
 import { GesturePasswordComponent } from './component';
 
 @NgModule({
-  imports: [ CommonModule ],
-  declarations: [ GesturePasswordComponent ],
-  exports: [ GesturePasswordComponent ]
+  imports: [CommonModule],
+  declarations: [GesturePasswordComponent],
+  exports: [GesturePasswordComponent],
 })
-export class GesturePasswordModule {
-}
+export class GesturePasswordModule {}

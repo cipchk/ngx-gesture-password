@@ -16,19 +16,22 @@ import { NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/forms';
 import { RecorderCanvas } from './recorder.canvas';
 import { Options } from './interfaces/options';
 import { ERR } from './interfaces/err';
+import { Result } from './interfaces/result';
 
 @Component({
   selector: 'gesture-password',
   template: ``,
   styles: [
-    `gesture-password {
-      position: relative;
-      width: 100%;
-      height: 100%;
-      min-height: 100px;
-      overflow: hidden;
-      display: block;
-    }`,
+    `
+      gesture-password {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        min-height: 100px;
+        overflow: hidden;
+        display: block;
+      }
+    `,
   ],
   providers: [
     {
@@ -38,23 +41,26 @@ import { ERR } from './interfaces/err';
     },
   ],
   encapsulation: ViewEncapsulation.None,
-  preserveWhitespaces: false
+  preserveWhitespaces: false,
 })
 export class GesturePasswordComponent
   implements OnInit, OnChanges, OnDestroy, ControlValueAccessor {
+  constructor(private el: ElementRef, private renderer: Renderer2) {}
   private password: string;
   protected rc: RecorderCanvas;
 
   @Input() options: Options;
   @Input() type: 'check' | 'recorder' = 'check';
+  // tslint:disable-next-line: no-output-native
   @Output() readonly error = new EventEmitter();
   @Output() readonly checked = new EventEmitter();
   @Output() readonly beforeRepeat = new EventEmitter();
   @Output() readonly afterRepeat = new EventEmitter();
 
-  constructor(private el: ElementRef, private renderer: Renderer2) { }
+  protected onChange: any = Function.prototype;
+  protected onTouched: any = Function.prototype;
 
-  async check() {
+  async check(): Promise<any> {
     this.rc.clearPath();
     const res = await this.rc.record();
 
@@ -72,7 +78,7 @@ export class GesturePasswordComponent
     return Promise.resolve(res);
   }
 
-  async recorder() {
+  async recorder(): Promise<Result> {
     // 第一次
     this.rc.clearPath();
     const first = await this.rc.record();
@@ -110,25 +116,24 @@ export class GesturePasswordComponent
     return Promise.resolve(second);
   }
 
-  render() {
-    const opt = Object.assign(
-      <Options>{
-        num: 3,
-        focusColor: '#e06555',
-        fgColor: '#d6dae5',
-        bgColor: '#fff',
-        innerRadius: 20,
-        outerRadius: 50,
-        touchRadius: 70,
-        customStyle: false,
-        render: true,
-        min: 4,
-        passwords: ['1', '2', '3', '4', '5', '6', '7', '8', '9'],
-      },
-      this.options,
-    );
-    if (opt.passwords.length !== opt.num * opt.num)
+  render(): this {
+    const opt: Options = {
+      num: 3,
+      focusColor: '#e06555',
+      fgColor: '#d6dae5',
+      bgColor: '#fff',
+      innerRadius: 20,
+      outerRadius: 50,
+      touchRadius: 70,
+      // customStyle: false,
+      render: true,
+      min: 4,
+      passwords: ['1', '2', '3', '4', '5', '6', '7', '8', '9'],
+      ...this.options,
+    };
+    if (opt.passwords.length !== opt.num * opt.num) {
       throw new Error(`密码编码必须是 ${opt.num * opt.num} 数量`);
+    }
 
     this.renderer.setStyle(
       this.el.nativeElement,
@@ -144,7 +149,7 @@ export class GesturePasswordComponent
     return this;
   }
 
-  destroy() {
+  destroy(): this {
     if (this.rc) {
       this.rc.destroy();
       this.rc = null;
@@ -152,7 +157,7 @@ export class GesturePasswordComponent
     return this;
   }
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.render();
   }
 
@@ -174,9 +179,6 @@ export class GesturePasswordComponent
     this.password = value;
   }
 
-  protected onChange: any = Function.prototype;
-  protected onTouched: any = Function.prototype;
-
   public registerOnChange(fn: (_: any) => {}): void {
     this.onChange = fn;
   }
@@ -184,5 +186,5 @@ export class GesturePasswordComponent
     this.onTouched = fn;
   }
 
-  setDisabledState(isDisabled: boolean): void { }
+  setDisabledState(isDisabled: boolean): void {}
 }

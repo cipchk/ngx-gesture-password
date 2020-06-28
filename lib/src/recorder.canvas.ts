@@ -30,8 +30,10 @@ export class RecorderCanvas {
     }
   }
 
-  render() {
-    if (this.circleCanvas) return false;
+  render(): boolean {
+    if (this.circleCanvas) {
+      return false;
+    }
 
     const { width, height } = this.container.getBoundingClientRect();
 
@@ -67,26 +69,28 @@ export class RecorderCanvas {
     return true;
   }
 
-  destroy() {
+  destroy(): void {
     this.container.removeChild(this.lineCanvas);
     this.container.removeChild(this.moveCanvas);
     this.container.removeChild(this.circleCanvas);
   }
 
-  async cancel() {
+  async cancel(): Promise<Result> {
     if (this.recordingTask) {
       return this.recordingTask.cancel();
     }
-    return Promise.resolve(<Result>{ err: ERR.NO_TASK });
+    return Promise.resolve({ err: ERR.NO_TASK } as Result);
   }
 
   async record(): Promise<Result> {
-    if (this.recordingTask) return this.recordingTask.promise;
+    if (this.recordingTask) {
+      return this.recordingTask.promise;
+    }
 
-    const { circleCanvas, lineCanvas, moveCanvas, options } = this,
-      circleCtx = circleCanvas.getContext('2d'),
-      lineCtx = lineCanvas.getContext('2d'),
-      moveCtx = moveCanvas.getContext('2d');
+    const { circleCanvas, lineCanvas, moveCanvas, options } = this;
+    const circleCtx = circleCanvas.getContext('2d');
+    const lineCtx = lineCanvas.getContext('2d');
+    const moveCtx = moveCanvas.getContext('2d');
 
     circleCanvas.addEventListener('touchstart', () => {
       this.clearPath();
@@ -95,20 +99,20 @@ export class RecorderCanvas {
     const records: any[] = [];
 
     const handler = (evt: any) => {
-      const { clientX, clientY } = evt.changedTouches[0],
-        {
-          bgColor,
-          focusColor,
-          innerRadius,
-          outerRadius,
-          touchRadius,
-        } = options,
-        touchPoint = this.getCanvasPoint(moveCanvas, clientX, clientY);
+      const { clientX, clientY } = evt.changedTouches[0];
+      const {
+        bgColor,
+        focusColor,
+        innerRadius,
+        outerRadius,
+        touchRadius,
+      } = options;
+      const touchPoint = this.getCanvasPoint(moveCanvas, clientX, clientY);
 
       for (let i = 0; i < this.circles.length; i++) {
-        const point = this.circles[i],
-          x0 = point.x,
-          y0 = point.y;
+        const point = this.circles[i];
+        const x0 = point.x;
+        const y0 = point.y;
 
         if (this.distance(point, touchPoint) < touchRadius) {
           this.drawSolidCircle(circleCtx, bgColor, x0, y0, outerRadius);
@@ -116,9 +120,9 @@ export class RecorderCanvas {
           this.drawHollowCircle(circleCtx, focusColor, x0, y0, outerRadius);
 
           if (records.length) {
-            const p2 = records[records.length - 1],
-              x1 = p2.x,
-              y1 = p2.y;
+            const p2 = records[records.length - 1];
+            const x1 = p2.x;
+            const y1 = p2.y;
 
             this.drawLine(lineCtx, focusColor, x0, y0, x1, y1);
           }
@@ -130,11 +134,11 @@ export class RecorderCanvas {
       }
 
       if (records.length) {
-        const point = records[records.length - 1],
-          x0 = point.x,
-          y0 = point.y,
-          x1 = touchPoint.x,
-          y1 = touchPoint.y;
+        const point = records[records.length - 1];
+        const x0 = point.x;
+        const y0 = point.y;
+        const x1 = touchPoint.x;
+        const y1 = touchPoint.y;
 
         moveCtx.clearRect(0, 0, moveCanvas.width, moveCanvas.height);
         this.drawLine(moveCtx, focusColor, x0, y0, x1, y1);
@@ -148,7 +152,9 @@ export class RecorderCanvas {
     const promise = new Promise<Result>((resolve: any, reject: any) => {
       const done = (evt: any) => {
         moveCtx.clearRect(0, 0, moveCanvas.width, moveCanvas.height);
-        if (!records.length) return;
+        if (!records.length) {
+          return;
+        }
 
         circleCanvas.removeEventListener('touchstart', handler);
         circleCanvas.removeEventListener('touchmove', handler);
@@ -160,16 +166,16 @@ export class RecorderCanvas {
           err = ERR.NOT_ENOUGH_POINTS;
         }
 
-        const res = <Result>{
+        const res = {
           err,
           result: records
             .map(
-              o =>
+              (o) =>
                 this.options.passwords[o.pos[0] * this.options.num + o.pos[1]],
             )
             .join(''),
           records,
-        };
+        } as Result;
 
         resolve(res);
         this.recordingTask = null;
@@ -199,14 +205,16 @@ export class RecorderCanvas {
     return promise;
   }
 
-  clearPath() {
-    if (!this.circleCanvas) this.render();
-    const { circleCanvas, lineCanvas, moveCanvas } = this,
-      circleCtx = circleCanvas.getContext('2d'),
-      lineCtx = lineCanvas.getContext('2d'),
-      moveCtx = moveCanvas.getContext('2d'),
-      width = circleCanvas.width,
-      { num, fgColor, innerRadius } = this.options;
+  clearPath(): void {
+    if (!this.circleCanvas) {
+      this.render();
+    }
+    const { circleCanvas, lineCanvas, moveCanvas } = this;
+    const circleCtx = circleCanvas.getContext('2d');
+    const lineCtx = lineCanvas.getContext('2d');
+    const moveCtx = moveCanvas.getContext('2d');
+    const width = circleCanvas.width;
+    const { num, fgColor, innerRadius } = this.options;
 
     circleCtx.clearRect(0, 0, width, width);
     lineCtx.clearRect(0, 0, width, width);
@@ -219,10 +227,10 @@ export class RecorderCanvas {
     // drawCircleCenters
     for (let i = 1; i <= num; i++) {
       for (let j = 1; j <= num; j++) {
-        const y = range * i,
-          x = range * j;
+        const y = range * i;
+        const x = range * j;
         this.drawSolidCircle(circleCtx, fgColor, x, y, innerRadius);
-        circles.push({ x: x, y: y, pos: [i - 1, j - 1] });
+        circles.push({ x, y, pos: [i - 1, j - 1] });
       }
     }
 
@@ -232,7 +240,11 @@ export class RecorderCanvas {
   /**
    * 获取屏幕在Canvas画布坐标
    */
-  private getCanvasPoint(canvas: any, x: number, y: number) {
+  private getCanvasPoint(
+    canvas: any,
+    x: number,
+    y: number,
+  ): { x: number; y: number } {
     const rect = canvas.getBoundingClientRect();
     return {
       x: 2 * (x - rect.left), // canvas 显示大小缩放为实际大小的 50%。为了让图形在 Retina 屏上清晰
@@ -240,16 +252,16 @@ export class RecorderCanvas {
     };
   }
 
-  private distance(p1: any, p2: any) {
-    const x = p2.x - p1.x,
-      y = p2.y - p1.y;
+  private distance(p1: any, p2: any): number {
+    const x = p2.x - p1.x;
+    const y = p2.y - p1.y;
     return Math.sqrt(x * x + y * y);
   }
 
   /**
    * 画实心圆
    */
-  private drawSolidCircle(ctx: any, color: any, x: any, y: any, r: any) {
+  private drawSolidCircle(ctx: any, color: any, x: any, y: any, r: any): void {
     ctx.fillStyle = color;
     ctx.beginPath();
     ctx.arc(x, y, r, 0, Math.PI * 2, true);
@@ -260,7 +272,7 @@ export class RecorderCanvas {
   /**
    * 画空心圆
    */
-  private drawHollowCircle(ctx: any, color: any, x: any, y: any, r: any) {
+  private drawHollowCircle(ctx: any, color: any, x: any, y: any, r: any): void {
     ctx.strokeStyle = color;
     ctx.beginPath();
     ctx.arc(x, y, r, 0, Math.PI * 2, true);
@@ -271,7 +283,14 @@ export class RecorderCanvas {
   /**
    * 画线段
    */
-  private drawLine(ctx: any, color: any, x1: any, y1: any, x2: any, y2: any) {
+  private drawLine(
+    ctx: any,
+    color: any,
+    x1: any,
+    y1: any,
+    x2: any,
+    y2: any,
+  ): void {
     ctx.strokeStyle = color;
     ctx.beginPath();
     ctx.moveTo(x1, y1);
