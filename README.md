@@ -4,7 +4,7 @@ A smart gesture password locker for angular (mobile browser)
 > 来源于 [如何用原生 JS 实现手势解锁组件](https://www.h5jun.com/post/handlock-comp.html?hmsr=toutiao.io)，有兴趣可以深入阅读！
 
 [![NPM version](https://img.shields.io/npm/v/ngx-gesture-password.svg)](https://www.npmjs.com/package/ngx-gesture-password)
-[![Build Status](https://travis-ci.org/cipchk/ngx-gesture-password.svg?branch=master)](https://travis-ci.org/cipchk/ngx-gesture-password)
+![Ci](https://github.com/cipchk/ngx-gesture-password/workflows/Ci/badge.svg)
 
 ## Demo
 
@@ -20,11 +20,6 @@ A smart gesture password locker for angular (mobile browser)
 **Ionic**
 
 ![ionic](https://github.com/cipchk/ngx-gesture-password/blob/master/screenshot/ionic.gif)
-
-## Version
-
-- `2.x` angular 6.x
-- `7.x` angular 7.x
 
 ## Usage
 

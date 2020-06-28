@@ -1,14 +1,9 @@
 {
   "name": "ngx-gesture-password",
-  "version": "0.0.0-PLACEHOLDER",
+  "version": "9.0.0",
   "description": "A smart gesture password locker for angular",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/cipchk/ngx-gesture-password.git"
-  },
   "keywords": [
     "ngx-gesture-password",
-    "ng2-gesture-password",
     "gesture",
     "gesture password",
     "hand lock"
@@ -18,5 +13,9 @@
   "bugs": {
     "url": "https://github.com/cipchk/ngx-gesture-password/issues"
   },
-  "homepage": "https://github.com/cipchk/ngx-gesture-password#readme"
+  "homepage": "https://github.com/cipchk/ngx-gesture-password#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cipchk/ngx-gesture-password.git"
+  }
 }
